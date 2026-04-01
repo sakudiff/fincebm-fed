@@ -1,0 +1,16 @@
+# Environments
+.venv/
+__pycache__/
+*.pyc
+
+# Local Data Cache
+# Keeping the UNRATE_full.csv as it's a critical local asset
+!UNRATE_full.csv
+
+# Outputs
+analysis_data.json
+
+# IDEs
+.vscode/
+.idea/
+.DS_Store
