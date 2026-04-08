@@ -1,0 +1,224 @@
+% ==============================================================================
+% DLSU Academic Paper Template (Clean Version)
+% ==============================================================================
+\documentclass[12pt]{article}
+
+% Packages for Advanced Formatting
+\usepackage{geometry}         % Page margins
+\geometry{margin=1in}         % APA requires 1-inch margins on all sides
+\usepackage{amsmath}          % Math environments and equation support
+\usepackage{amssymb}          % Additional math symbols
+\usepackage{tikz}             % Vector graphics and diagrams
+\usetikzlibrary{calc}         % TikZ coordinate calculations
+\usepackage{xcolor}           % Color support (defines dlsugreen below)
+\usepackage{graphicx}         % Image inclusion (\includegraphics, \safeincludegraphics)
+\graphicspath{{.}}            % Search for images in current directory
+\usepackage{caption}          % Caption formatting control
+\usepackage{subcaption}       % Sub-figures and sub-tables within a single float
+\usepackage{booktabs}         % Professional table rules (\toprule, \midrule, \bottomrule)
+\usepackage{tabularx}         % Tables with automatic column width adjustment
+\usepackage{array}            % Enhanced table column types
+\usepackage{siunitx}          % Aligned numerical columns in tables
+\usepackage{threeparttable}   % Tables with footnotes that don't affect column width
+\usepackage{rotating}         % Rotated floats (sidewaystable, sidewaysfigure)
+\usepackage{adjustbox}        % Auto-scaling tables and images to fit page
+\usepackage{pdflscape}        % Landscape pages in PDF output
+\usepackage{float}            % [H] specifier: force exact float placement
+\usepackage{tablefootnote}    % Footnotes inside tables (\tablefootnote{...})
+\usepackage{listings}         % Source code listings with syntax highlighting
+\usepackage{setspace}         % Line spacing (\doublespacing, \singlespacing)
+\usepackage{titlesec}         % Section heading format customization
+\usepackage{ragged2e}         % Improved text alignment (\RaggedRight)
+\usepackage{indentfirst}      % Indent first paragraph after each heading (APA style)
+\usepackage{csquotes}         % Context-sensitive quotation marks
+\usepackage[hidelinks]{hyperref} % Clickable references and cross-references
+\usepackage{url}              % URL formatting and line-break control
+\usepackage[style=apa, backend=biber]{biblatex} % APA 7th edition bibliography
+\addbibresource{references.bib}  % Your bibliography database file
+
+% Color Definitions
+\definecolor{dlsugreen}{HTML}{00703C}  % Official DLSU green for headings and accents
+
+% APA 7th Edition: Headings & Indents
+\titleformat{\section}{\normalfont\Large\bfseries\centering}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalfont\large\bfseries}{\thesubsection}{1em}{}
+\titlespacing*{\section}{0pt}{12pt}{6pt}     
+\titlespacing*{\subsection}{0pt}{12pt}{6pt}
+\titleformat{\subsubsection}{\normalfont\normalsize\bfseries}{\thesubsubsection}{1em}{}
+\titlespacing*{\subsubsection}{0pt}{12pt}{6pt}
+\setlength{\bibhang}{0.5in}  % Hanging indent for bibliography entries (APA style)
+
+\renewcommand{\TPTnoteSettings}{
+  \parshape 1 0pt \linewidth
+  \footnotesize\itshape
+}
+
+\newenvironment{safetable}[1][\textwidth]{
+  \begin{adjustbox}{max width=#1,center}%
+}{
+  \end{adjustbox}%
+}
+
+\newenvironment{largetable}{
+  \begin{landscape}%
+  \begin{adjustbox}{max width=\textwidth,center}%
+}{
+  \end{adjustbox}%
+  \end{landscape}%
+}
+
+\renewcommand{\topfraction}{0.9}       
+\renewcommand{\bottomfraction}{0.9}    
+\renewcommand{\textfraction}{0.1}      
+\setcounter{topnumber}{3}              
+\setcounter{bottomnumber}{3}           
+\setcounter{totalnumber}{5}            
+
+\clubpenalty=10000                     
+\widowpenalty=10000                    
+\displaywidowpenalty=10000             
+
+\urlstyle{same}                        
+\setcounter{biburlnumpenalty}{100}     
+\setcounter{biburlucpenalty}{100}      
+\setcounter{biburllcpenalty}{100}      
+
+\allowdisplaybreaks
+
+\captionsetup{font={small,singlespacing}, labelfont=bf}
+
+\newcommand{\safeincludegraphics}[2][]{%
+  \adjustimage{max width=\textwidth, #1}{#2}%
+}
+
+\AtBeginBibliography{\singlespacing}
+
+\begin{document}
+% Document-wide formatting
+\sloppy                    
+\doublespacing             
+\RaggedRight               
+\setlength{\parindent}{0.5in}  
+
+\thispagestyle{empty}
+
+\begin{titlepage}
+    \centering
+
+    % Top Logo and Name (Inline)
+    \vspace*{0.5cm}
+    \begin{tabular}{c@{\quad}l}
+        \raisebox{-2.0ex}{\includegraphics[height=3.5em]{dlsu_logo.png}} & 
+        \huge \textbf{\color{dlsugreen} De La Salle University}
+    \end{tabular}
+    
+    \vfill
+
+    % Central Seal
+    \includegraphics[width=0.25\textwidth]{dlsu_logo.png} \\
+
+    \vfill
+
+    % Project Title
+    {\LARGE \textbf{The Federal Reserve: Good for Main Street or Wall Street---or Both?}} \\
+    \vspace{1.5cm}
+
+    \begin{minipage}{0.8\textwidth}
+        \centering
+        {\normalsize In Partial Fulfillment of the Course Requirements for \ {} Presented to \ {} Ahmed Meandahawi, Ph.D. \ {} Department of Financial Management \ {} Ramon V. del Rosario College of Business}
+    \end{minipage}
+
+    \vfill
+
+    \begin{minipage}{0.8\textwidth}
+        \centering
+        {\normalsize 2nd Term, AY 25-26}
+    \end{minipage}
+
+    \vfill
+
+    {\normalsize By:} \\
+    \vspace{0.5cm}
+    {\normalsize 
+    Jazmine Julian \ 
+    {} Lance Matthew Sanchez \ 
+    {} Jeanne Carla Serafica \ 
+    {} Aaron Joshua Sison \ 
+    {} Jill Anne Uy}
+
+    \vfill
+
+    {\normalsize April 8, 2026}
+\end{titlepage}
+
+\newpage
+\tableofcontents
+\newpage
+
+\section{Introduction}
+{} The Federal Reserve, commonly referred to as "the Fed," forms the cornerstone of the United States' financial system and serves as the nation's central bank. Its dual mandate is to maintain price stability and promote maximum sustainable employment. In addition to these objectives, the Fed acts as the "lender of last resort," supplying liquidity to prevent economic paralysis during periods of severe financial distress. Central to its operation is the principle of central bank independence, which insulates monetary policy decisions from short-term political influences and enables policymakers to prioritize long-term economic stability over immediate electoral considerations \parencite{Richardson_2025, Athanasopoulos_2025}.
+
+{} The extraordinary interventions implemented during the Global Financial Crisis of 2007--2009 and the COVID-19 pandemic of 2020 have intensified debate over the Federal Reserve's autonomy. Although these actions aimed to prevent systemic collapse, they revealed a perceived divide between the interests of large financial institutions and those of households and small businesses. Critics argue that substantial liquidity injections and asset purchases appeared to favor the solvency of major financial firms and the stability of equity markets, while leaving broader segments of the population to contend with unemployment and foreclosure. This perception has prompted fundamental questions regarding whether an institution with significant influence over national economic policy should remain insulated from direct democratic oversight \parencite{Buchanan_2016}.
+
+{} This paper explores the intricate tension between technocratic independence and democratic accountability in central banking. Through analysis of the Federal Reserve's crisis-era policies, assessment of the theoretical advantages of institutional insulation, comparison with the hyperinflationary outcomes of government-controlled banks such as those in Zimbabwe, and evaluation of the empirical lag between market recovery and labor stability, this study addresses the central question: Should a central bank operate independently from the rest of the government? The analysis ultimately seeks to determine whether the current structure of the Federal Reserve provides optimal protection for the U.S. economy or warrants a more comprehensive system of checks and balances.
+
+\section{Historical Context}
+{} The Federal Reserve took immediate action to prevent systemic collapse during the Global Financial Crisis of 2007--2009. It utilized emergency powers under Section 13(3) of the Federal Reserve Act to provide liquidity to nonbank institutions, including AIG and investment banks, along with conducting large-scale asset purchases, also known as Quantitative Easing (QE), with the intent to stabilize credit markets. These measures, often referred to as "Wall Street QE" \parencite{Sims_2020}, improved confidence but received severe criticism. The Federal Reserve was accused by many citizens and political leaders of rewarding reckless institutions while neglecting homeowners, as programs like the Home Affordable Modification Program (HAMP) just reached a small number of the intended households \parencite{Agarwal_2017}. Former Chairman Ben Bernanke defended the controversial bailouts, arguing that their absence would have caused economic downturns within days, emphasizing the need for politically insulated measures despite public dissent.
+
+{} The COVID-19 pandemic posed a different concern, rooted not in financial excess but from a sudden halt of actual economic activity. In light of the ineffectiveness of regular quantitative easing amid the absence of firm revenue, the Federal Reserve transformed to "Main Street QE" by establishing the Main Street Lending Program (MSLP) and the Paycheck Protection Program Liquidity Facility (PPPLF) \parencite{Sims_2020}. These programs offered direct credit support to small and medium-sized enterprises and allowed community banks to expand their lending, but acceptance was limited. Critics argued that strict qualifications excluded some of the most vulnerable firms and that interventions inflated asset prices despite relatively high unemployment rates. Supporters praised the Federal Reserve's prompt response, highlighting that its independence allowed immediate actions not met by Congress. Political leaders from several parties recognized that these steps prevented a financial collapse, emphasizing the Federal Reserve's dual role in maintaining Wall Street's liquidity while striving to ensure Main Street's survival.
+
+{} The Federal Reserve stabilizes financial intermediaries before providing direct consumer relief. The central bank prioritized systemic liquidity over household assistance during the Global Financial Crisis. The government granted investment banks massive and immediate bailouts. Main Street debt relief programs failed to reach most distressed homeowners. Large mortgage servicers restricted debt renegotiations under the Home Affordable Modification Program \parencite{Agarwal_2017}.
+
+{} This structural disparity emerged again during the pandemic. The Federal Reserve established the Main Street Lending Program to assist small businesses \parencite{Sims_2020}. Strict underwriting standards limited the direct utilization of these corporate loans. The central bank also executed massive asset purchases to compress interest rates. These purchases drove equity markets to record highs while civilian unemployment remained elevated.
+
+{} Financial interventions create a persistent temporal lag between market recovery and labor stability. Equity valuations rebound rapidly following aggressive monetary expansion. Employment figures require significantly more time to recover. This dynamic generates a severe disconnect between institutional wealth and working class stability. Wall Street recovers months or years before Main Street feels the economic relief.
+
+\section{Main Street vs. Wall Street}
+{} The Federal Reserve's crisis interventions have often been criticized as favoring large financial institutions, commonly referred to as ``Wall Street,'' over households and small businesses, or ``Main Street.'' However, this apparent imbalance largely reflects differences in how monetary policy transmits through the economy rather than an explicit distributional preference. During the 2007 to 2009 Global Financial Crisis, the Federal Reserve concentrated its efforts on stabilizing systemically important financial intermediaries through emergency lending under Section 13(3), the rescue of AIG, and large-scale purchases of Treasury securities and agency mortgage-backed securities through Quantitative Easing \parencite{Sims_2020}. These measures disproportionately supported major banks and capital markets, while programs aimed directly at households, most notably the Home Affordable Modification Program, were slow, administratively complex, and limited in scope \parencite{Agarwal_2017}. This contrast fueled widespread perceptions of favoritism.
+
+{} However, during the 2008 crisis, the primary macroeconomic friction was the collapse of financial intermediation itself. Restoring the solvency and liquidity of large, interconnected financial firms was a necessary condition for preventing a broader economic depression that would have imposed far greater costs on households and small businesses. The COVID-19 crisis presented a distinct challenge characterized by sudden and widespread cash-flow shortages among non-financial firms rather than balance-sheet impairment within banks. In response, the Federal Reserve adapted its approach by establishing facilities such as the Main Street Lending Program and the Paycheck Protection Program Liquidity Facility to support small and mid-sized businesses more directly \parencite{Sims_2020}.
+
+{} Despite these efforts, asset prices recovered faster than employment, reinforcing perceptions of a Wall Street--Main Street divide. This divergence reflects the stock market's forward-looking nature and the labor market's tendency to recover more slowly, rather than a deliberate policy bias. Overall, while Federal Reserve interventions produced unequal short-term outcomes, they were primarily guided by technical assessments of systemic risk and the constraints of monetary policy transmission rather than preferential treatment of large financial firms.
+
+\section{Central Bank Independence}
+{} Central Bank Independence is the institutional doctrine that a nation's monetary authority should be legally and operationally protected from short-term political pressures \parencite{Richardson_2025}. In actuality, this is essential as it addresses time-inconsistency issues, which occur when politicians are inclined to promote expansionary policies for short-term gains, particularly during election seasons, at the cost of higher long-term inflation. Moreover, independent central banks gain credibility with global markets by prioritizing price stability above political gains. This lowers sovereign borrowing costs and allows them to enact strict but necessary policies in times of crisis \parencite{Athanasopoulos_2025}. 
+
+{} The 2008 crisis in Zimbabwe demonstrates what occurs when the central bank essentially becomes an extension of the government due to fiscal supremacy. The Reserve Bank of Zimbabwe lost its independence and was used to create money recklessly to fund deficits, military expenditures, and political commitments. The economy entered a hyperinflationary spiral that shortly became uncontrolled as the money supply increased rapidly while actual production decreased. Inflation had risen to extremely high levels by November 2008, with monthly rates of 79.6 billion percent and annual rates of 89.7 sextillion percent. Millions of people were forced into poverty, the middle class crumbled, savings suffered severely, and the nation was eventually forced to give up its currency. In contrast to autonomous organizations such as the United States Federal Reserve, Zimbabwe's situation makes it abundantly evident that, in the absence of central bank independence, monetary policy becomes a weapon for short-term political survival, with detrimental and long-lasting economic repercussions. The Federal Reserve is fundamentally prohibited from directly supporting government debt. Ultimately, central bank independence is an essential safeguard that maintains economic stability, reinforces market trust, and keeps short-term political interests from threatening a country's long-term financial credibility \parencite{Athanasopoulos_2025}.
+
+\section{Critical Analysis}
+{} The persistent temporal lag between financial market recovery and labor stability fuels the debate over central bank independence. Data from the Federal Reserve Economic Data API illustrates this macroeconomic divergence during the 2008 and 2020 crises. The S\&P 500 index rebounded to 1,029.85 by October 2009 while unemployment peaked at 10.0 percent. A similar asset price overshooting occurred in December 2020 when equities reached 3,662.45 despite a 6.7 percent unemployment rate. Populist stakeholders view this deliberate wealth transfer as a catastrophic failure requiring immediate democratic oversight.
+
+\begin{figure}[H]
+  \centering
+  \safeincludegraphics[width=0.8\textwidth]{analysis_plot.png}
+  \caption{Federal Reserve Interventions: Impact on S\&P 500 vs. Unemployment Rate}
+  \label{fig:macro_divergence}
+  \textit{Note.} Source: Federal Reserve Economic Data (FRED). The plot illustrates the leading recovery of asset prices relative to lagging labor stability.
+\end{figure}
+
+{} Critics argue that an insulated Federal Reserve suffers from a severe democratic deficit. Elected officials demand oversight to prevent technocrats from prioritizing Wall Street solvency over Main Street employment. Lawmakers face direct electoral consequences for economic downturns while central bankers operate without immediate accountability. Some economists contend that regular congressional audits would force the Federal Reserve to implement policies favoring the working class. This perspective frames technocratic isolation as an aristocratic shield rather than a functional necessity.
+
+{} Defenders of independence argue that political oversight inevitably creates a time inconsistency problem. Politicians optimize monetary policy for immediate electoral cycles rather than long term stability. Legal scholars warn that democratic accountability in central banking invites destructive self-dealing by elected officials \parencite{Buchanan_2016}. An autonomous institution absorbs the political hostility generated by necessary but deeply unpopular financial rescues. Without this insulation, legislative gridlock would paralyze emergency liquidity interventions during acute crises.
+
+{} The equity and unemployment data ultimately validate the necessity of technocratic isolation. Stock market valuations act as a leading indicator of future systemic liquidity. Unemployment remains a notoriously sluggish lagging indicator of economic health. An independent Federal Reserve stabilizes asset prices rapidly to heal corporate balance sheets and lower debt costs. Political interference would interrupt this required capital formation out of populist anger and convert a temporary labor lag into a permanent depression.
+
+\section{Discussion}
+% Summary
+{} In summary, this analysis examined the essential tension between central bank independence and democratic accountability by evaluating the Federal Reserve's unconventional monetary interventions during the 2008 Global Financial Crisis and the 2020 COVID-19 pandemic. The Federal Reserve's operational autonomy allowed for the rapid deployment of specialized lending facilities and quantitative easing to stabilize fundamentally different macroeconomic shocks. Although these actions prevented deeper depressions, they consistently produced a temporal lag where capital markets (Wall Street) recovered much faster than the labor market (Main Street), inflaming public grievances about inequity.
+
+% Importance / The Sell
+{} This evaluation is critically important because it clarifies the functional necessity of the Federal Reserve's technocratic insulation. By demonstrating how politically insulated central banks can execute necessary but unpopular systemic rescues, and by contrasting this with the hyperinflationary catastrophe of politically subservient monetary policy in Zimbabwe, this paper validates the institutional architecture of central bank independence. Our findings reinforce the premise that preserving an independent Federal Reserve is a necessary safeguard against the time-inconsistency problem of politicians prioritizing short-term output over long-term price stability.
+
+% Limitations
+{} There are, however, limitations to this analysis that demarcate its boundaries. The evaluation relies heavily on aggregate indices, specifically the S\&P 500 and the civilian unemployment rate, which do not capture the granular microeconomic disparities experienced by different demographic and socioeconomic groups during these crises. Furthermore, the analysis focuses strictly on the Federal Reserve and the extraordinary case of Zimbabwe; it does not empirically address whether more moderate structural reforms or targeted transparency requirements could incrementally improve the Federal Reserve's democratic accountability without sacrificing its crisis-fighting efficacy. Future research should evaluate alternative oversight models implemented by other advanced economies' central banks.
+
+\section{Conclusion}
+% Conclusion
+{} In conclusion, the ongoing tension between technocratic independence and democratic accountability constitutes the central paradox of the Federal Reserve's role in the American economy. While its insulation enables the rapid deployment of liquidity to avert systemic collapse, the mechanisms of monetary transmission tend to benefit capital markets before labor markets, fueling a perceived democratic deficit. Yet, the current framework of Federal Reserve independence serves as an indispensable bulwark against economic instability and fiscal dominance. Subjecting the central bank to direct political control would likely paralyze its ability to manage crises and invite the disastrous consequences of politicized monetary policy. The United States must preserve the Federal Reserve's autonomy, ensuring that technical expertise remains the primary driver of national monetary stability.
+
+\printbibliography[title={References}]
+
+\end{document}
+rintbibliography[title={References}]
+
+\end{document}

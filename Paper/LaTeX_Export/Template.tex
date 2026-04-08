@@ -1,0 +1,452 @@
+% ==============================================================================
+% DLSU Academic Paper Template (Clean Version)
+% ==============================================================================
+% Purpose:  APA 7th-edition formatted template for De La Salle University papers
+% Compile:  xelatex -> biber -> xelatex -> xelatex (or use latexmk -pdf -xelatex)
+%
+% QUICK START:
+%   1. Replace all [bracketed placeholders] with your content
+%   2. Place dlsu_logo.png in the same directory as this .tex file
+%   3. Add your references to references.bib in BibTeX format
+%   4. Compile with: latexmk -pdf -xelatex Template.tex
+%
+% STRUCTURE GUIDE:
+%   \section{...}        -> Level 1 heading (centered, bold, large)
+%   \subsection{...}     -> Level 2 heading (left-aligned, bold)
+%   \subsubsection{...}  -> Level 3 heading (left-aligned, bold, normal size)
+%   {} at start of line  -> Forces paragraph indent (APA style)
+%
+% TABLE USAGE:
+%   Normal tables (auto-scales if too wide):
+%     \begin{table}[H]
+%       \centering
+%       \begin{safetable}
+%         \begin{threeparttable}
+%           \caption{...}  \label{...}  \begin{tabular}{...} ... \end{tabular}
+%           \begin{tablenotes} \item \footnotesize Note: ... \end{tablenotes}
+%         \end{threeparttable}
+%       \end{safetable}
+%     \end{table}
+%
+%   Wide tables (landscape + auto-scale):
+%     \begin{largetable}
+%       \begin{table}[H] ...same structure... \end{table}
+%     \end{largetable}
+%
+% FIGURE USAGE:
+%   \safeincludegraphics{filename.png}         -> auto-scales to text width
+%   \safeincludegraphics[width=0.5\textwidth]{filename.png} -> custom width
+%
+% CODE LISTINGS:
+%   \begin{lstlisting}[language=R]
+%     # Your code here
+%   \end{lstlisting}
+%   Supported languages: R, Python, Java, C++, MATLAB, SQL
+%
+% CITATIONS:
+%   \cite{key}             -> (Author, Year)
+%   \textcite{key}         -> Author (Year)
+%   \parencite{key}        -> (Author, Year)
+%   \autocite{key}         -> (Author, Year)
+%   Multiple: \parencite{key1, key2}
+% ==============================================================================
+
+\documentclass[12pt]{article}
+
+% Packages for Advanced Formatting
+\usepackage{geometry}         % Page margins
+\geometry{margin=1in}         % APA requires 1-inch margins on all sides
+\usepackage{amsmath}          % Math environments and equation support
+\usepackage{amssymb}          % Additional math symbols
+\usepackage{tikz}             % Vector graphics and diagrams
+\usetikzlibrary{calc}         % TikZ coordinate calculations
+\usepackage{xcolor}           % Color support (defines dlsugreen below)
+\usepackage{graphicx}         % Image inclusion (\includegraphics, \safeincludegraphics)
+\graphicspath{{.}}            % Search for images in current directory
+\usepackage{caption}          % Caption formatting control
+\usepackage{subcaption}       % Sub-figures and sub-tables within a single float
+\usepackage{booktabs}         % Professional table rules (\toprule, \midrule, \bottomrule)
+\usepackage{tabularx}         % Tables with automatic column width adjustment
+\usepackage{array}            % Enhanced table column types
+\usepackage{siunitx}          % Aligned numerical columns in tables
+\usepackage{threeparttable}   % Tables with footnotes that don't affect column width
+\usepackage{rotating}         % Rotated floats (sidewaystable, sidewaysfigure)
+\usepackage{adjustbox}        % Auto-scaling tables and images to fit page
+\usepackage{pdflscape}        % Landscape pages in PDF output
+\usepackage{float}            % [H] specifier: force exact float placement
+\usepackage{tablefootnote}    % Footnotes inside tables (\tablefootnote{...})
+\usepackage{listings}         % Source code listings with syntax highlighting
+\usepackage{setspace}         % Line spacing (\doublespacing, \singlespacing)
+\usepackage{titlesec}         % Section heading format customization
+\usepackage{ragged2e}         % Improved text alignment (\RaggedRight)
+\usepackage{indentfirst}      % Indent first paragraph after each heading (APA style)
+\usepackage{csquotes}         % Context-sensitive quotation marks
+\usepackage[hidelinks]{hyperref} % Clickable references and cross-references
+\usepackage{url}              % URL formatting and line-break control
+\usepackage[style=apa, backend=biber]{biblatex} % APA 7th edition bibliography
+\addbibresource{references.bib}  % Your bibliography database file
+
+% Color Definitions
+\definecolor{dlsugreen}{HTML}{00703C}  % Official DLSU green for headings and accents
+
+% R Code Listings Configuration
+% Supports: R, Python, Java, C++, MATLAB, SQL, and more
+% Usage: \begin{lstlisting}[language=Python] ... \end{lstlisting}
+\lstset{
+  language=R,
+  basicstyle=\small\ttfamily,
+  breaklines=true,              % Auto-wrap long code lines
+  breakatwhitespace=true,       % Break only at spaces (not mid-identifier)
+  keepspaces=true,              % Preserve indentation on line breaks
+  columns=flexible,             % Better spacing for monospace fonts
+  showstringspaces=false,       % Do not mark spaces in strings
+  keywordstyle=\color{blue},     % Keywords in blue
+  commentstyle=\color{dlsugreen},% Comments in DLSU green
+  stringstyle=\color{purple},    % Strings in purple
+  backgroundcolor=\color{gray!5},% Light gray background
+  frame=single,                  % Single-line border around code
+  framerule=0pt,                 % No visible border (cleaner look)
+  xleftmargin=10pt,              % Left padding inside code block
+  xrightmargin=10pt,             % Right padding inside code block
+  aboveskip=15pt,                % Space above code block
+  belowskip=15pt,                % Space below code block
+  breakindent=10pt,              % Indent amount for wrapped lines
+  postbreak=\mbox{\textcolor{red}{$\hookrightarrow$}\space} % Arrow on broken lines
+}
+
+% APA 7th Edition: Headings & Indents
+% Section headings are centered, bold, and large
+% Subsection headings are left-aligned, bold, and medium
+% Subsubsection headings are left-aligned, bold, and normal size
+\titleformat{\section}{\normalfont\Large\bfseries\centering}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalfont\large\bfseries}{\thesubsection}{1em}{}
+\titlespacing*{\section}{0pt}{12pt}{6pt}     % {left}{before}{after} spacing
+\titlespacing*{\subsection}{0pt}{12pt}{6pt}
+\titleformat{\subsubsection}{\normalfont\normalsize\bfseries}{\thesubsubsection}{1em}{}
+\titlespacing*{\subsubsection}{0pt}{12pt}{6pt}
+\setlength{\bibhang}{0.5in}  % Hanging indent for bibliography entries (APA style)
+
+% Table Safety Configuration
+% Prevents threeparttable footnotes from shrinking table column widths
+% Tables are sized to content, not to the width of their footnotes
+\renewcommand{\TPTnoteSettings}{%
+  \parshape 1 0pt \linewidth
+  \footnotesize\itshape
+}
+
+% Safe Table Environments
+% \begin{safetable} ... \end{safetable}
+%   Auto-scales any table that exceeds \textwidth to fit within margins.
+%   Use this for all normal tables.
+%
+% \begin{largetable} ... \end{largetable}
+%   Rotates the page to landscape and auto-scales the table.
+%   Use this when a table has many columns and cannot fit portrait mode.
+%
+% Both environments center the table and work with threeparttable.
+\newenvironment{safetable}[1][\textwidth]{%
+  \begin{adjustbox}{max width=#1,center}%
+}{%
+  \end{adjustbox}%
+}
+
+\newenvironment{largetable}{%
+  \begin{landscape}%
+  \begin{adjustbox}{max width=\textwidth,center}%
+}{%
+  \end{adjustbox}%
+  \end{landscape}%
+}
+
+% Float Placement Configuration
+% Controls how LaTeX positions tables and figures on pages
+% These values prioritize placing floats at the top of pages
+\renewcommand{\topfraction}{0.9}       % Max fraction of page for top floats
+\renewcommand{\bottomfraction}{0.9}    % Max fraction of page for bottom floats
+\renewcommand{\textfraction}{0.1}      % Min fraction of page for text
+\setcounter{topnumber}{3}              % Max floats at top of page
+\setcounter{bottomnumber}{3}           % Max floats at bottom of page
+\setcounter{totalnumber}{5}            % Max floats on a single page
+
+% Orphan and Widow Control
+% Prevents single lines stranded at page top (widow) or bottom (club)
+% Setting penalties to 10000 makes LaTeX strongly avoid these situations
+\clubpenalty=10000                     % Penalize single line at page bottom
+\widowpenalty=10000                    % Penalize single line at page top
+\displaywidowpenalty=10000             % Same for display math environments
+
+% URL and Link Break Protection
+% Allows long URLs and DOIs to break at numeric/letter boundaries
+% Prevents these from overflowing into page margins
+\urlstyle{same}                        % URLs use same font as body text
+\setcounter{biburlnumpenalty}{100}     % Allow breaks after digits in URLs
+\setcounter{biburlucpenalty}{100}      % Allow breaks after uppercase letters
+\setcounter{biburllcpenalty}{100}      % Allow breaks after lowercase letters
+
+% Math Equation Page Break Support
+% Allows multi-line equation environments (align, gather) to span pages
+% Without this, long equations cause "Underfull page" warnings
+\allowdisplaybreaks
+
+% Caption Formatting
+% APA 7th edition requires single-spaced captions, smaller font
+% Labels (Table 1, Figure 1) are bold
+\captionsetup{font={small,singlespacing}, labelfont=bf}
+
+% Figure Width Protection Command
+% \safeincludegraphics{image.png} auto-scales images that exceed \textwidth
+% Optional arguments work normally: \safeincludegraphics[width=3in]{image.png}
+% Use this instead of \includegraphics to prevent image overflow
+\newcommand{\safeincludegraphics}[2][]{%
+  \adjustimage{max width=\textwidth, #1}{#2}%
+}
+
+% Bibliography Spacing Override
+% APA 7th edition requires single-spaced references
+% This overrides \doublespacing only within the bibliography
+\AtBeginBibliography{\singlespacing}
+
+\begin{document}
+% Document-wide formatting
+\sloppy                    % Relaxed line-breaking to prevent overfull hbox warnings
+\doublespacing             % APA 7th ed: double-spaced body text (bibliography overrides)
+\RaggedRight               % Right-ragged text (prevents awkward word spacing in narrow cols)
+\setlength{\parindent}{0.5in}  % Standard paragraph indent (APA style)
+
+% Titlepage Page Number Suppression
+% Removes the page number "1" from the title page
+\thispagestyle{empty}
+
+\begin{titlepage}
+    \centering
+
+    % Top Logo and Name (Inline)
+    \vspace*{0.5cm}
+    \begin{tabular}{c@{\quad}l}
+        \raisebox{-2.0ex}{\includegraphics[height=3.5em]{dlsu_logo.png}} & 
+        \huge \textbf{\color{dlsugreen} De La Salle University}
+    \end{tabular}
+    
+    \vfill
+
+    % Central Seal
+    \includegraphics[width=0.25\textwidth]{dlsu_logo.png} \\
+
+    \vfill
+
+    % Project Title
+    {\LARGE \textbf{[Project Title Here]}} \\
+    \vspace{1.5cm}
+
+    \begin{minipage}{0.8\textwidth}
+        \centering
+        {\normalsize [Course Description/Project Context] \\ {} [Presented to] \\ {} [The Department Name] \\ {} [College/University Name]}
+    \end{minipage}
+
+    \vfill
+
+    \begin{minipage}{0.8\textwidth}
+        \centering
+        {\normalsize in partial fulfillment of the requirements for the course \\ {} \textbf{[Course Name]}}
+    \end{minipage}
+
+    \vfill
+
+    {\normalsize By:} \\
+    \vspace{0.5cm}
+    {\normalsize 
+    [Author Name 1] \\ 
+    {} [Author Name 2] \\ 
+    {} [Author Name 3] \\ 
+    {} [Author Name 4]}
+
+    \vfill
+
+    {\normalsize [Month DD, YYYY]}
+\end{titlepage}
+
+\newpage
+\tableofcontents
+\newpage
+
+\section{Introduction}
+{} [Insert introduction text here. Contextualize the problem and define the scope.]
+% Tip: {} at the start forces a paragraph indent per APA style
+% Use \cite{key} for in-text citations throughout
+
+\subsection{Objectives}
+% Use itemize for bullet points; use enumerate for numbered lists
+\begin{itemize}
+    \item \textbf{[Primary Objective]:} [Description]
+    \item \textbf{[Secondary Objective]:} [Description]
+\end{itemize}
+
+\section{Methodology}
+{} [Describe the research design and quantitative framework.]
+
+\subsection{Technical Workflow}
+{} [Detail the computational pipeline from ingestion to modeling.]
+
+\subsection{Data Acquisition and Preprocessing}
+{} [Describe data sources and cleaning procedures (e.g., return calculation, alignment).]
+
+\subsection{Econometric Framework}
+{} [Define the model (e.g., Multivariate OLS) and hypothesis testing logic.]
+
+\section{Results}
+{} [Present empirical findings and statistical significance.]
+
+\subsection{Descriptive Statistics}
+{} [Summary statistics and distributional analysis.]
+
+% ---------------------------------------------------------------------------
+% TABLE EXAMPLE 1: Normal Table (auto-scales if too wide)
+% Usage: Uncomment the block below and replace placeholder content.
+% [H] forces the table to stay exactly here (does not float).
+% Replace [H] with [tbp] to allow LaTeX to find the best placement.
+% ---------------------------------------------------------------------------
+% \begin{table}[H]
+%   \centering
+%   \begin{safetable}
+%     \begin{threeparttable}
+%       \caption{Descriptive Statistics}
+%       \label{tab:desc_stats}
+%       \begin{tabular}{lcccc}
+%         \toprule
+%         Variable & Mean & Std. Dev. & Min & Max \\
+%         \midrule
+%         [Variable 1] & [X.XX] & [X.XX] & [X.XX] & [X.XX] \\
+%         [Variable 2] & [X.XX] & [X.XX] & [X.XX] & [X.XX] \\
+%         \bottomrule
+%       \end{tabular}
+%       \begin{tablenotes}
+%         \item \footnotesize Note: [Explain abbreviations, data sources, or special conditions.]
+%         \item[] \footnotesize \tablefootnote{Use \textbackslash tablefootnote\{...\} for numbered footnotes inside table cells.}
+%       \end{tablenotes}
+%     \end{threeparttable}
+%   \end{safetable}
+% \end{table}
+
+% ---------------------------------------------------------------------------
+% TABLE EXAMPLE 2: Wide Table (landscape + auto-scale)
+% Usage: For tables with many columns that cannot fit portrait orientation.
+% The largetable environment rotates the page and scales the content.
+% ---------------------------------------------------------------------------
+% \begin{largetable}
+%   \begin{table}[H]
+%     \centering
+%     \begin{threeparttable}
+%       \caption{Correlation Matrix of Predictor Variables}
+%       \label{tab:correlation_matrix}
+%       \begin{tabular}{lcccccccc}
+%         \toprule
+%         Variable & 1 & 2 & 3 & 4 & 5 & 6 & 7 \\
+%         \midrule
+%         1. [Var A] & 1.00 &       &       &       &       &       &       \\
+%         2. [Var B] & .45** & 1.00 &       &       &       &       &       \\
+%         3. [Var C] & -.12  & .33*  & 1.00  &       &       &       &       \\
+%         \bottomrule
+%       \end{tabular}
+%       \begin{tablenotes}
+%         \item \footnotesize Note: * p < .05, ** p < .01.
+%       \end{tablenotes}
+%     \end{threeparttable}
+%   \end{table}
+% \end{largetable}
+
+% ---------------------------------------------------------------------------
+% TABLE EXAMPLE 3: APA-style Regression Results
+% ---------------------------------------------------------------------------
+% \begin{table}[H]
+%   \centering
+%   \begin{safetable}
+%     \begin{threeparttable}
+%       \caption{OLS Regression Results for [Dependent Variable]}
+%       \label{tab:regression}
+%       \begin{tabular}{lccc}
+%         \toprule
+%         Predictor & Model 1 & Model 2 & Model 3 \\
+%         \midrule
+%         [Variable 1] & 0.42*** & 0.38*** & 0.35** \\
+%                      & (0.10)  & (0.11)  & (0.12)  \\
+%         [Variable 2] &         & 0.21*   & 0.19*  \\
+%                      &         & (0.09)  & (0.09)  \\
+%         [Variable 3] &         &         & 0.15   \\
+%                      &         &         & (0.08)  \\
+%         \midrule
+%         Constant     & 1.20*** & 0.95**  & 0.88** \\
+%                      & (0.30)  & (0.32)  & (0.33)  \\
+%         \midrule
+%         N            & 150     & 150     & 150    \\
+%         Adj. R\textsuperscript{2} & 0.18 & 0.24 & 0.27 \\
+%         \bottomrule
+%       \end{tabular}
+%       \begin{tablenotes}
+%         \item \footnotesize Note: Standard errors in parentheses. * p < .05, ** p < .01, *** p < .001.
+%       \end{tablenotes}
+%     \end{threeparttable}
+%   \end{safetable}
+% \end{table}
+
+\subsection{Visual Analytics}
+{} [Interpret key charts, scatter plots, and time-series growth.]
+
+% ---------------------------------------------------------------------------
+% FIGURE EXAMPLE: Auto-scaled image with caption
+% \safeincludegraphics prevents images from exceeding text width.
+% Standard \includegraphics still works if you need full control.
+% ---------------------------------------------------------------------------
+% \begin{figure}[H]
+%   \centering
+%   \safeincludegraphics[width=0.7\textwidth]{my_chart.png}
+%   \caption{[Descriptive figure title explaining what the reader should observe.]}
+%   \label{fig:my_chart}
+%   \note. [APA-style figure note: describe methods, scales, or data sources.]
+% \end{figure}
+
+\subsection{Regression Results and Model Performance}
+{} [Analyze coefficients, p-values, and Adjusted R-squared.]
+
+\section{Practical Implications}
+{} [Discuss the application of findings in professional or academic contexts.]
+
+\section{Conclusion}
+{} [Summarize findings, address limitations, and propose future research.]
+
+\printbibliography[title={References}]
+
+\newpage
+\appendix
+\section{Technical Implementation Code} \label{sec:appendix_code}
+{} [Insert R/Python code snippets here using the lstlisting environment.]
+
+% ---------------------------------------------------------------------------
+% CODE LISTING EXAMPLE: Inline code block
+% The language parameter enables syntax highlighting.
+% Supported: R, Python, Java, C++, MATLAB, SQL, JavaScript, and more.
+% ---------------------------------------------------------------------------
+% \begin{lstlisting}[language=Python, caption={Data preprocessing pipeline}]
+% import pandas as pd
+%
+% # Load and clean dataset
+% df = pd.read_csv("data.csv")
+% df = df.dropna(subset=["revenue", "cost"])
+% df["margin"] = df["revenue"] - df["cost"]
+%
+% # Summary statistics
+% print(df.describe())
+% \end{lstlisting}
+
+% ---------------------------------------------------------------------------
+% CODE LISTING EXAMPLE: External file inclusion
+% Use this for longer scripts. The file must be in the same directory.
+% firstline/lastline: show only a portion of the file.
+% ---------------------------------------------------------------------------
+% \lstinputlisting[
+%   language=R,
+%   caption={Regression analysis script},
+%   firstline=1,
+%   lastline=30
+% ]{analysis.R}
+
+\end{document}
