@@ -14,3 +14,17 @@ analysis_data.json
 .vscode/
 .idea/
 .DS_Store
+
+# LaTeX temporary files
+*.aux
+*.bcf
+*.fls
+*.log
+*.out
+*.toc
+*.run.xml
+*.synctex.gz
+*.xdv
+*.fdb_latexmk
+*.bbl
+*.blg
